@@ -23,6 +23,40 @@ const CrudApp = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  // Add a new item
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (isEditing) {
+      // Update existing item
+      await fetch(`http://localhost:3000/items/${currentId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      // Update the items array to reflect the changes
+      setItems((prevItems) =>
+        prevItems.map((item) =>
+          item.id === currentId ? { ...item, ...formData } : item
+        )
+      );
+      setIsEditing(false);
+    } else {
+      // Add new item
+      const response = await fetch("http://localhost:3000/items", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const newItem = await response.json();
+      setItems((prevItems) => [...prevItems, newItem]);
+    }
+    setFormData({ name: "", email: "" });
+  };
+
   return (
     <div className="container">
       <h1>CRUD Application</h1>
