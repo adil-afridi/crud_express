@@ -57,6 +57,22 @@ const CrudApp = () => {
     setFormData({ name: "", email: "" });
   };
 
+  // Edit an item
+  const handleEdit = (item) => {
+    setFormData({ name: item.name, email: item.email });
+    setCurrentId(item.id);
+    setIsEditing(true);
+  };
+
+  // Delete an item
+  const handleDelete = async (id) => {
+    await fetch(`http://localhost:3000/items/${id}`, {
+      method: "DELETE",
+    });
+    // Update state to remove the deleted item
+    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  };
+
   return (
     <div className="container">
       <h1>CRUD Application</h1>
