@@ -37,3 +37,12 @@ app.delete('/items/:id', (req, res) => {
     items = items.filter(item => item.id != id);
     res.json({ message: 'Item deleted' });
 });
+
+
+
+
+// Start the server
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+});
