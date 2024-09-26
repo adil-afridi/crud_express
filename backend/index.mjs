@@ -16,3 +16,8 @@ app.post('/items', (req, res) => {
     items.push(item);
     res.json(item);
 });
+
+// Read - Get all items
+app.get('/items', (req, res) => {
+    res.json(items);
+});
