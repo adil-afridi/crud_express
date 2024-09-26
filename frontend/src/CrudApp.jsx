@@ -35,7 +35,6 @@ const CrudApp = () => {
         },
         body: JSON.stringify(formData),
       });
-      // Update the items array to reflect the changes
       setItems((prevItems) =>
         prevItems.map((item) =>
           item.id === currentId ? { ...item, ...formData } : item
@@ -43,7 +42,6 @@ const CrudApp = () => {
       );
       setIsEditing(false);
     } else {
-      // Add new item
       const response = await fetch("http://localhost:3000/items", {
         method: "POST",
         headers: {
@@ -69,7 +67,6 @@ const CrudApp = () => {
     await fetch(`http://localhost:3000/items/${id}`, {
       method: "DELETE",
     });
-    // Update state to remove the deleted item
     setItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
@@ -77,7 +74,6 @@ const CrudApp = () => {
     <div className="container">
       <h1>CRUD Application</h1>
 
-      {/* Form for Creating and Updating */}
       <form onSubmit={handleSubmit} className="form mt-5 mb-3">
         <input
           type="text"
@@ -103,8 +99,7 @@ const CrudApp = () => {
           </button>
         </div>
       </form>
-
-      {/* Display List of Items in a Table */}
+      {/* display list of item */}
       <table className="table table-bordered table-striped">
         <thead>
           <tr>
@@ -117,7 +112,7 @@ const CrudApp = () => {
           {items.map((item) => (
             <tr key={item.id}>
               {" "}
-              {/* Ensure that item.id is unique */}
+              
               <td>{item.name}</td>
               <td>{item.email}</td>
               <td>
