@@ -13,6 +13,16 @@ const CrudApp = () => {
     setItems(data);
   };
 
+  useEffect(() => {
+    fetchItems();
+  }, []);
+
+  // Handle form input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
   return (
     <div className="container">
       <h1>CRUD Application</h1>
