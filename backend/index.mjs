@@ -29,3 +29,11 @@ app.put('/items/:id', (req, res) => {
     items = items.map(item => (item.id == id ? updatedItem : item));
     res.json(updatedItem);
 });
+
+
+// Delete - Remove an item by id
+app.delete('/items/:id', (req, res) => {
+    const { id } = req.params;
+    items = items.filter(item => item.id != id);
+    res.json({ message: 'Item deleted' });
+});
