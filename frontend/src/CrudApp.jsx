@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
 
 const CrudApp = () => {
-
   const [items, setItems] = useState([]);
   const [formData, setFormData] = useState({ name: "", email: "" });
   const [isEditing, setIsEditing] = useState(false);
   const [currentId, setCurrentId] = useState(null);
- 
+
+  // Fetch items from the backend
+  const fetchItems = async () => {
+    const response = await fetch("http://localhost:3000/items");
+    const data = await response.json();
+    setItems(data);
+  };
 
   return (
     <div className="container">
