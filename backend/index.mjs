@@ -21,3 +21,11 @@ app.post('/items', (req, res) => {
 app.get('/items', (req, res) => {
     res.json(items);
 });
+
+// Update - Edit an item by id
+app.put('/items/:id', (req, res) => {
+    const { id } = req.params;
+    const updatedItem = req.body;
+    items = items.map(item => (item.id == id ? updatedItem : item));
+    res.json(updatedItem);
+});
