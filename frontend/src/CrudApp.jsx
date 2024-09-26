@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 
 const CrudApp = () => {
+
+  const [items, setItems] = useState([]);
+  const [formData, setFormData] = useState({ name: "", email: "" });
+  const [isEditing, setIsEditing] = useState(false);
+  const [currentId, setCurrentId] = useState(null);
  
 
   return (
